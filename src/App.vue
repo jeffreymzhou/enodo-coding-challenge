@@ -3,9 +3,11 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/parse">Stage 1: Parse</router-link>|
-      <router-link to="/maps">Stage 2: Maps</router-link>
+      <router-link to="/mapstest">Stage 2: Maps Test</router-link>
     </div>
     <router-view/>
+   
+
   </div>
 </template>
 
@@ -30,8 +32,16 @@
 </style>
 
 <script>
+import Maps from '@/components/Maps'
+import ListView from '@/components/ListView'
+import Sidebar from '@/components/Sidebar'
 
 export default {
+  components: {
+    'Maps': Maps,
+    'Sidebar': Sidebar,
+    'ListView': ListView
+  }
   
 }
 </script>

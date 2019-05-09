@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Parse from './views/Parse.vue'
-import Maps from './views/Maps.vue'
+import MapsTest from './views/MapsTest.vue'
 
 Vue.use(Router)
 
@@ -21,9 +21,9 @@ export default new Router({
       component: Parse
     },
     {
-      path: '/maps',
-      name: 'maps',
-      component: Maps
+      path: '/mapstest',
+      name: 'mapstest',
+      component: MapsTest
     }
   ]
 })

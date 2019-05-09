@@ -1,6 +1,6 @@
 <template>  
    <div>
-       <h1>Map is here</h1>
+       <h1>Map</h1>
        <div id="map" class="h-500"></div>
    </div>
 </template>
@@ -39,13 +39,40 @@
      },
    },
    mounted() {
+     this.$markers = []
      this.$map = new google.maps.Map(document.getElementById('map'), {
        center: new google.maps.LatLng(this.latitude, this.longitude),
        zoom: this.zoom
      });
+
+   },
+   created(){
+     EventBus.$on('clear-markers', () =>{
+       this.clearMarkers();
+       this.$markers = [];
+     });
+     EventBus.$on('add-marker', (data) =>{
+       let marker = this.makeMarker(data.latitude, data.longitude);
+       this.$markers.push(marker);
+     })
    },
    data(){
        return {};
+   },
+   methods: {
+     makeMarker(latitude, longitude) {
+       return new google.maps.Marker({
+         position: new google.maps.LatLng(latitude, longitude),
+         icon: null,
+         map: this.$map,
+         title: null,
+       })
+     },
+     clearMarkers(){
+       for(let i = 0; i < this.$markers.length; i++){
+         this.$markers[i].setMap(null);
+       }
+     }
    }
  }
 </script>  
