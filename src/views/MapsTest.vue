@@ -1,23 +1,25 @@
 <template>
-    <div>
-        <maps/>
-    </div>
-    
-    
-    
-
+  <div>
+    <Maps/>
+    <Sidebar/>
+    <ListView/>
+  </div>
 </template>
 
 
 
 
 <script>
-export default {
-    components: {
-    },
-    data() {
-        return {}
-    }
+import Maps from '@/components/Maps'
+import ListView from '@/components/ListView'
+import Sidebar from '@/components/Sidebar'
 
+export default {
+  components: {
+    'Maps': Maps,
+    'Sidebar': Sidebar,
+    'ListView': ListView
+  }
+  
 }
 </script>
