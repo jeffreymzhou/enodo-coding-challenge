@@ -2,7 +2,7 @@
   <div>
     <div class="row">
       <div class="col-md-3">
-        <button @click="" class="btn btn-primary"> 
+        <button class="btn btn-primary"> 
           Filter
         </button>
 
