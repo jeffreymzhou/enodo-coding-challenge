@@ -3,15 +3,10 @@
     <h1>
         FILTER TEST
     </h1>
-    <div class="row">
-      <div class="col-md-3">
-        Side column
-      </div>
-      <div class="col-md-9">
+    <div class="container">
         <FilterTestTable/>
-      </div>
-      
     </div>
+        
   </div>
 </template>
 
@@ -20,11 +15,12 @@
 
 <script>
 import FilterTestTable from '@/components/FilterTestTable'
-
+import FilterTestSidebar from '@/components/FilterTestSidebar'
 
 export default {
   components: {
-    'FilterTestTable': FilterTestTable
+    'FilterTestTable': FilterTestTable,
+    'FilterTestSidebar': FilterTestSidebar
   }
   
 }

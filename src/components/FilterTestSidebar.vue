@@ -1,9 +1,9 @@
 <template>
-  <div>
-    <button class="btn btn-primary" @click="filter_method">
+    <div>
+        <button class="btn btn-primary" @click="filter_method">
       Filter test 
     </button>
-    <br><br>
+    <br>
      <b-form>
       <b-form-group id="input-group-2" label-for="input-2">
         <b-form-input
@@ -50,44 +50,34 @@
           placeholder="enter price max"
         ></b-form-input>
       </b-form-group>
+      <b-button type="reset" variant="danger">Reset</b-button> 
     </b-form>
-    <br>
     <h4>
       Filtered data:
     </h4>
     <b-table striped hover :items="filtered_test_data"></b-table>
-  </div>
+    </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   data() {
-    return{
-      filtered_test_data: {},
-      num_filters:{ //numerical filters (min and max)
-        num:{
-          min: "",
-          max: ""
-        },
-        price:{
-          min: "",
-          max: ""
-        }
-      },
-      type_filters:{ //categorical filters
-        desc:""
-      }
-    }
+    return{}
   },
   computed: {
     ...mapState([
       'sample',
       'data',
-      'filter_test_data'
+      'filter_test_data',
+      'filtered_test_data'
     ])
   },
   methods: {
+    ...mapActions([
+      'updateFilteredData'
+    ]),
     filter_all(p){
 
       var pass = true

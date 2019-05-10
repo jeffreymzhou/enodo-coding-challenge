@@ -22,9 +22,6 @@
         <button @click="clearMarkers" class="btn btn-danger">
             Clear Markers
         </button>
-        <button @click="printApiKey" class="btn btn-success">
-            Print API Key
-        </button>
     </div>
 </template>
 
@@ -42,14 +39,9 @@ export default {
                 latitude: this.latitude,
                 longitude: this.longitude
             })
-            console.log("addMarker invoked")
         },
         clearMarkers(){
             EventBus.$emit('clear-markers')
-            console.log("clearMarkers invoked")
-        },
-        printApiKey(){
-            console.log(config.GMAP_KEY)
         }
     }
 }

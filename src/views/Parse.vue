@@ -1,46 +1,13 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-md-3">
-        <button class="btn btn-primary"> 
-          Filter
-        </button>
-
-    <b-form @submit.prevent="handleSubmit">
-      <b-form-group id="input-group-2" label="est_market_val_min:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          type="number"
-          v-model="filters.ESTIMATED_MARKET_VALUE.min"
-          required
-          placeholder="enter number"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="est_market_val_max:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          type="number"
-          v-model="filters.ESTIMATED_MARKET_VALUE.max"
-          required
-          placeholder="enter number"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-      </div>
-      <div class="col-md-3">
         <h1>
           Data Table
         </h1>
         
         
         <b-table striped hover :items="data"></b-table>
-      </div>
+      
         
-    </div>
   </div>
 </template>
 

@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Parse from './views/Parse.vue'
 import MapsTest from './views/MapsTest.vue'
 import FilterTest from './views/FilterTest.vue'
+import PopulateMap from'./views/PopulateMap.vue'
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path: '/filtertest',
       name: 'filtertest',
       component: FilterTest
+    },
+    {
+      path: '/popmap',
+      name: 'popmap',
+      component: PopulateMap
     }
   ]
 })

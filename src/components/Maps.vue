@@ -1,7 +1,7 @@
 <template>  
    <div>
        <h1>Map</h1>
-       <div id="map" class="h-500"></div>
+       <div id="map" class="h-full"></div>
    </div>
 </template>
 
@@ -12,6 +12,9 @@
    }
    .h-500 {
        height:500px;
+   }
+   .h-full {
+     height: 100vh;
    }
 </style>  
 <script>  
@@ -68,7 +71,6 @@
    },
    methods: {
      makeMarker(latitude, longitude) {
-       console.log("makeMarker-onmaps invoked")
        var new_marker = new google.maps.Marker({
         position: new google.maps.LatLng(latitude, longitude),
         icon:{
@@ -101,7 +103,6 @@
       return new_marker;
      },
      clearMarkers(){
-       console.log("clearMarkers-onmaps invoked")
        for(let i = 0; i < this.$markers.length; i++){
          this.$markers[i].setMap(null);
        }
