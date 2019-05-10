@@ -1,29 +1,53 @@
 <template>
   <div>
     <button class="btn btn-primary" @click="filter_method">
-      Filter test 1
+      Filter test 
     </button>
-    <button class="btn btn-primary" @click="filter_method_minmax">
-      Filter test minmax
-    </button>
+    <br>
      <b-form>
-      <b-form-group id="input-group-2" label="min" label-for="input-2">
+      <b-form-group id="input-group-2" label-for="input-2">
         <b-form-input
           id="input-2"
           type="number"
-          v-model="filters.min"
+          v-model="num_filters.num.min"
           required
           placeholder="enter min"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="max" label-for="input-2">
+      <b-form-group id="input-group-2" label-for="input-2">
         <b-form-input
           id="input-2"
           type="number"
-          v-model="filters.max"
+          v-model="num_filters.num.max"
           required
           placeholder="enter max"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          v-model="type_filters.desc"
+          required
+          placeholder="enter desc"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2" label-for="input-2">
+        <b-form-input
+          id="input-2"
+          type="number"
+          v-model="num_filters.price.min"
+          required
+          placeholder="enter price min"
+        ></b-form-input>
+      </b-form-group>
+      <b-form-group id="input-group-2"  label-for="input-2">
+        <b-form-input
+          id="input-2"
+          type="number"
+          v-model="num_filters.price.max"
+          required
+          placeholder="enter price max"
         ></b-form-input>
       </b-form-group>
 
@@ -47,21 +71,19 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return{
-      dumbdata: [
-        { name: "jeffrey",
-          num: 1
-        },
-        { name: "ada",
-          num: 2
-        },
-        { name: "chris",
-          num: 3
-        }
-      ],
       filtered_data: {},
-      filters:{
-        min: "",
-        max: ""
+      num_filters:{ //numerical filters (min and max)
+        num:{
+          min: "",
+          max: ""
+        },
+        price:{
+          min: "",
+          max: ""
+        }
+      },
+      type_filters:{ //categorical filters
+        desc:""
       }
     }
   },
@@ -81,31 +103,49 @@ export default {
         }
       })
     },
-    filter_num(p){
-      var max = this.filters.max
-      var min = this.filters.min
-      if((max.length === 0 && min.length === 0)){ //nothing inputted
-        return p;
+    filter_all(p){
+
+      var pass = true
+      var num_filters = this.num_filters
+      var type_filters = this.type_filters
+    
+      for(var filter in num_filters){ //filter all numerical values
+        var min = num_filters[filter].min 
+        var max = num_filters[filter].max
+        var curr_val = p[filter]
+        if(min.length > 0){ 
+          if(curr_val < min){
+            pass = false
+            break
+          }
+        }
+        if(max.length > 0){ 
+          if(curr_val > max){
+            pass = false
+            break
+          }
+        }
       }
-      if((max.length === 0)&&(min.length > 0)){ //max is not specified
-        if(p.num >= min){
-          return p
-        }
-      }else if((min.length === 0)&&(max.length > 0)){ //min is not specified
-        if(p.num <= max){
-          return p
-        }
-      }else{ //both are specified
-        if((p.num <= max)&&(p.num >= min)){
-          return p
-        }
+
+      for(var filter in type_filters){ //filter all categorical values
+        var desired_str = type_filters[filter]
+        var curr_str = p[filter]
+        if(desired_str.length > 0){
+          if(curr_str !== desired_str){
+            pass = false
+            break
+          }
+        } 
+
       }
-      
+      if(pass){ //final return
+        return p
+      }
 
     },
-    filter_method_minmax(){
-      console.log('filter method minmax is called')
-      this.filtered_data = this.filter_test_data.filter(this.filter_num)
+    filter_method(){
+      console.log('filter method is called')
+      this.filtered_data = this.filter_test_data.filter(this.filter_all)
     }
   }
 }
