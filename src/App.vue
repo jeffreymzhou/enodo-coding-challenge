@@ -3,7 +3,8 @@
     <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/parse"> Stage 1: Parse </router-link> |
-      <router-link to="/mapstest"> Stage 2: Maps Test </router-link>
+      <router-link to="/mapstest"> Stage 2: Maps Test </router-link>|
+      <router-link to="/filtertest"> Stage 3: Filter Test </router-link>
     </div>
     <router-view/>
   </div>

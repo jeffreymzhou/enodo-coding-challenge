@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Parse from './views/Parse.vue'
 import MapsTest from './views/MapsTest.vue'
+import FilterTest from './views/FilterTest.vue'
 
 Vue.use(Router)
 
@@ -24,6 +25,11 @@ export default new Router({
       path: '/mapstest',
       name: 'mapstest',
       component: MapsTest
+    },
+    {
+      path: '/filtertest',
+      name: 'filtertest',
+      component: FilterTest
     }
   ]
 })
