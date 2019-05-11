@@ -7,6 +7,7 @@ import actions from './actions'
 import getters from './getters'
 
 
+window.Vue = Vue;
 Vue.use(Vuex)
 
 export default new Vuex.Store({

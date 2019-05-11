@@ -31,7 +31,8 @@ export default {
   computed: {
     ...mapState([
       'sample',
-      'data'
+      'data',
+      'full_property_data'
     ])
   },
   methods: {

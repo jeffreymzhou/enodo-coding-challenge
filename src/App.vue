@@ -6,7 +6,8 @@
       <router-link to="/mapstest"> Maps Test </router-link>|
       <router-link to="/filtertest"> Filter Test </router-link>|
       <router-link to="/popmap"> Populate Map </router-link>|
-      <router-link to="/colorgradient"> Color Gradient </router-link>
+      <router-link to="/colorgradient"> Color Gradient </router-link>|
+      <router-link to="/fullmap"> Full Map </router-link>
     </div>
     <router-view/>
   </div>

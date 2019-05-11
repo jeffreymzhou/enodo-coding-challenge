@@ -6,6 +6,7 @@ import MapsTest from './views/MapsTest.vue'
 import FilterTest from './views/FilterTest.vue'
 import PopulateMap from'./views/PopulateMap.vue'
 import ColorGradient from'./views/ColorGradient.vue'
+import FullMap from './views/FullMap.vue'
 
 Vue.use(Router)
 
@@ -42,6 +43,11 @@ export default new Router({
       path: '/colorgradient',
       name: 'colorgradient',
       component: ColorGradient
+    },
+    {
+      path: '/fullmap',
+      name: 'fullmap',
+      component: FullMap
     }
   ]
 })
