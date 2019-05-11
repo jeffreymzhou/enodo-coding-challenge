@@ -27,25 +27,26 @@ import { mapState } from 'vuex'
 
  let sanfrancisco = [37.782685, -122.411364];
  let africa = [1,1];
+ let us_center = [38.526600,-96.726486]
 
  export default {
   props: {
     'latitude': {
       type: Number,
       default() {
-        return sanfrancisco[0]
+        return us_center[0]
       }
     },
     'longitude': {
       type: Number,
       default() {
-        return sanfrancisco[1]
+        return us_center[1]
       }
     },
     'zoom': {
       type: Number,
       default() {
-        return 14
+        return 5
       }
     },
   },
@@ -79,10 +80,45 @@ import { mapState } from 'vuex'
     })
   },
   data(){
-    return {};
+    return {
+      range:{ 
+          min: "0",
+          max: "400"
+        
+      },
+    };
   },
   methods: {
-    makeMarker(latitude, longitude, addr) {
+    make_color(num){
+      var min = parseInt(this.range.min)
+      var max = parseInt(this.range.max)
+      var middle = (min + max)/2
+      if(num >= max){
+        return '#00ff77'
+      }
+      if(num <= min){
+        return '#ff0077'
+      }
+      if(num >= middle){
+        var g = 255
+        var r = 255 - Math.round(((num-middle)/middle)*255)
+      }else{
+        var g = Math.round((num/middle)*255)
+        var r = 255
+      }
+      var r_hex = Number(r).toString(16)
+      var g_hex = Number(g).toString(16)
+      var rl = ""
+      var gl = ""
+      if(r_hex.length === 1){
+        rl = "0"
+      }
+      if(g_hex.length === 1){
+        gl = "0"
+      }
+      return '#' + rl + r_hex + gl + g_hex + '77'
+    },
+    makeMarker(latitude, longitude, addr, colval) {
       console.log("makeMarker-onmaps invoked")
       var new_marker = new google.maps.Marker({
         position: new google.maps.LatLng(latitude, longitude),
@@ -92,7 +128,7 @@ import { mapState } from 'vuex'
           strokeColor: '#000000',
           strokeWeight: 1,
           scale: 0.75,
-          fillColor: '#FFFF00',
+          fillColor: this.make_color(colval),
           anchor: new google.maps.Point(12, 24),
         },
         map: this.$map,
@@ -123,8 +159,9 @@ import { mapState } from 'vuex'
         var name = filter_test_data[property].name
         var longitude = filter_test_data[property].longitude
         var latitude = filter_test_data[property].latitude
+        var colval = filter_test_data[property].price
         console.log(property + "| name: " + name + " | lat: " + latitude + " | long: " + longitude)
-        this.makeMarker(latitude, longitude, name)
+        this.makeMarker(latitude, longitude, name, colval)
       }
      }
    }

@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1>
-            ListView
+            List of Markers
         </h1>
         <p>
             Marker count: {{ markers.length }}

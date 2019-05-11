@@ -5,6 +5,7 @@ import Parse from './views/Parse.vue'
 import MapsTest from './views/MapsTest.vue'
 import FilterTest from './views/FilterTest.vue'
 import PopulateMap from'./views/PopulateMap.vue'
+import ColorGradient from'./views/ColorGradient.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/popmap',
       name: 'popmap',
       component: PopulateMap
+    },
+    {
+      path: '/colorgradient',
+      name: 'colorgradient',
+      component: ColorGradient
     }
   ]
 })
