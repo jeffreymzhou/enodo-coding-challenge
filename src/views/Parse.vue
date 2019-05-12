@@ -1,9 +1,9 @@
 <template>
   <div>
-        <h1>
-          Data Table
-        </h1>
-        <b-table striped hover :items="full_data"></b-table>   
+    <h1>
+      Data Table
+    </h1>
+    <b-table striped hover :items="full_data"></b-table>   
   </div>
 </template>
 
@@ -36,17 +36,11 @@ export default {
       req.onload = function() {
         var data = new Uint8Array(req.response);
         var workbook = XLSX.read(data, {type:"array"});
-
         /* DO SOMETHING WITH workbook HERE */
-
-
-      var first_sheet_name = workbook.SheetNames[0];
-      /* Get worksheet */
-      var worksheet = workbook.Sheets[first_sheet_name];
-
-      console.log(XLSX.utils.sheet_to_json(worksheet))
-      
-       
+        var first_sheet_name = workbook.SheetNames[0];
+        /* Get worksheet */
+        var worksheet = workbook.Sheets[first_sheet_name];
+        console.log(XLSX.utils.sheet_to_json(worksheet))      
       };
       req.send();
     }

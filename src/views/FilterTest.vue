@@ -7,7 +7,7 @@
       Filter test 
     </button>
     <br><br>
-     <b-form>
+    <b-form>
       <b-form-group id="input-group-2" label-for="input-2">
         <b-form-input
           id="input-2"
@@ -17,7 +17,6 @@
           placeholder="enter min"
         ></b-form-input>
       </b-form-group>
-
       <b-form-group id="input-group-2" label-for="input-2">
         <b-form-input
           id="input-2"

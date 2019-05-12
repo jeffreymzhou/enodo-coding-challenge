@@ -47,7 +47,7 @@
        </b-col>
      </b-row>
 
- <!-------------------PROPERTY DETAILS-------------------------------------------------> 
+ <!--PROPERTY DETAILS--> 
 
       <b-row class="my-1 mt-4">
         <b-col sm="12" class="text-center">
@@ -104,8 +104,6 @@
          <b-form-input id="input-none" v-model="num_filters.ESTIMATED_MARKET_VALUE.max" size="sm" placeholder="Max (usd)"></b-form-input>
        </b-col>
      </b-row>
-
-
 <!-- EXT DESC -->
      <b-row class="my-1 mt-2">
        <b-col sm="6"  class="text-left">
@@ -143,7 +141,6 @@
        </b-col>
      </b-row>
 <!-- FULL_BATH-->
-     
      <b-row class="my-1 mt-2">
       <b-col sm="6" class="text-left">
        Full Bath:
@@ -156,7 +153,6 @@
        </b-col>
      </b-row>
 <!-- HALF_BATH-->
-     
      <b-row class="my-1 mt-2">
       <b-col sm="6" class="text-left">
        Half Bath:
@@ -169,7 +165,6 @@
        </b-col>
      </b-row>
 <!-- AC-->
-     
      <b-row class="my-1 mt-2">
       <b-col sm="6" class="text-left">
        AC:
@@ -220,10 +215,8 @@
       <b-button variant="light" size="sm" @click="this.toggle_extra_filters" v-if="!this.show_extra_filters">Show Extra Filters</b-button>
       <b-button variant="light" size="sm" @click="this.toggle_extra_filters" v-if="this.show_extra_filters">Hide Extra Filters</b-button>
 
-     
     </div>
     <div class="col-md-2" v-if='this.show_extra_filters' >
-
       <b-row class="my-1 mt-2">
         <b-col sm="12" class="text-center">
           <h5>
@@ -298,7 +291,6 @@
           </h5>
         </b-col>
       </b-row>
-
 <!-- BLDG_USE -->
      <b-row class="my-1 mt-2">
        <b-col sm="6"  class="text-left">
@@ -308,13 +300,14 @@
          <b-form-select v-model="type_filters.BLDG_USE" :options="options.bldg_use" size="sm" class="mt-0"></b-form-select>
        </b-col>
      </b-row>  
-<!-- Prior Year -->
+<!-- Prior year-->
      <b-row class="my-1 mt-2">
        <b-col sm="6"  class="text-left">
          Prior year:
        </b-col>
        <b-col sm="6 ml-0 pl-0">
-         <b-form-select v-model="type_filters.PRIOR_YEAR" :options="options.prior_year" size="sm" class="mt-0"></b-form-select>
+         <b-form-input  value="2013" size="sm" class="mt-0" disabled>
+         </b-form-input>
        </b-col>
      </b-row>
 <!-- REC TYPE -->
@@ -579,6 +572,7 @@
     height: 100vh;
   }
 </style>  
+
 <script>  
 import { mapState } from 'vuex'
 
@@ -650,13 +644,13 @@ export default {
         class_desc:[
           { value: null, text: 'Any'},
           { value: 'Two to Six Apartments, Over 62 Years', text: 'Two to Six Apartments, Over 62 Years' },
-          { value: 'Mixed commercial/residential building, 6 units or less, sq ft less than 20,000                                    ', text: 'Mixed commercial/residential building, 6 units or less, sq ft less than 20,000'},
-          { value: 'Two or three story non-fireproof corridor apartments,or california type apartments, interior entrance                         ', text: 'Two or three story non-fireproof corridor apartments,or california type apartments, interior entrance'},
-          { value: 'Two or three story non-frprf. crt. and corridor apts or california type apts, no corridors, ex. entrance                       ', text: 'Two or three story non-frprf. crt. and corridor apts or california type apts, no corridors, ex. entrance'},
+          { value: 'Mixed commercial/residential building, 6', text: 'Mixed commercial/residential building, 6 units or less, sq ft less than 20,000'},
+          { value: 'Two or three story non-fire', text: 'Two or three story non-fireproof corridor apartments,or california type apartments, interior entrance'},
+          { value: 'Two or three story non-frprf', text: 'Two or three story non-frprf. crt. and corridor apts or california type apts, no corridors, ex. entrance'},
           { value: 'Mixed use commercial/residential with apts. above seven units or more or building sq. ft. over 20,000', text: 'Mixed use commercial/residential with apts. above seven units or more or building sq. ft. over 20,000'},
           { value: 'row houses', text: 'Rental mdrn row houses, 7 or more unts in a sing. dvlpment or 1 or more contig. prcls in comm. ownrshp'},
           { value: '2 or 3 story bldng, 7 or more units, sngle devel., 1 or more contig. parcels, in common ownership ', text: '2 or 3 story bldng, 7 or more units, sngle devel., 1 or more contig. parcels, in common ownership '},
-          { value: 'Special residential improvements ', text: 'Special residential improvements '},                                                                                                                                           
+          { value: 'Special residential improvements ', text: 'Special residential improvements '},
         ],
         res_type: [
           { value: null, text: 'Any'},
@@ -666,7 +660,7 @@ export default {
         ],
         bldg_use: [
           { value: null, text: 'Any'},
-          { value: 'Multi Family  ', text: 'Multi Family'}
+          { value: 'Multi Family', text: 'Multi Family'}
 
         ],
         prior_year:[
@@ -708,9 +702,7 @@ export default {
           { value: '1 1/2 Car A', text: '1 1/2 Car Attached'},
           { value: '1 1/2 Car D', text: '1 1/2 Car Detached'},
           { value: '1 Car A', text: '1 Car Attached'},
-          { value: '1 Car D', text: '1 Car Detached'}
-          
-          
+          { value: '1 Car D', text: '1 Car Detached'} 
         ],
         appeal_a_status: [
           { value: null, text: 'Any'},
@@ -859,7 +851,7 @@ export default {
         CLASS_DESCRIPTION: null,
         RES_TYPE: null,
         BLDG_USE: null,
-        PRIOR_YEAR: null,
+        PPRIOR_YEAR: null,
         EXT_DESC: null,
         FULL_BATH: null,
         HALF_BATH: null,
@@ -983,7 +975,6 @@ export default {
         infowindow.setContent(addr);
         infowindow.open(map, new_marker);
       });
-      // assuming you also want to hide the infowindow when user mouses-out
       new_marker.addListener('mouseout', function() {
         infowindow.close();
       });

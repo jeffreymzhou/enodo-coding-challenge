@@ -1,35 +1,33 @@
 <template>  
-   <div>
-       <h1>Populate Map</h1>
-    <button @click="populateMap" class="btn btn-primary">
+    <div>
+      <h1>Populate Map</h1>
+      <button @click="populateMap" class="btn btn-primary">
         Populate
-    </button>
-    <br><br>
-       <div id="map" class="h-full"></div>
-   </div>
+      </button>
+      <br><br>
+      <div id="map" class="h-full"></div>
+    </div>
 </template>
 
 <style scoped>  
-   #map {
-       margin: 0 auto;
-       background: gray;
-   }
-   .h-500 {
-       height:500px;
-   }
-   .h-full {
-     height: 100vh;
-   }
-</style>  
-<script>  
+  #map {
+    margin: 0 auto;
+    background: gray;
+  }
+  .h-500 {
+    height:500px;
+  }
+  .h-full {
+    height: 100vh;
+  }
+</style>
+<script>
 import { mapState } from 'vuex'
 
+let sanfrancisco = [37.782685, -122.411364];
+let us_center = [38.526600,-96.726486]
 
- let sanfrancisco = [37.782685, -122.411364];
- let africa = [1,1];
- let us_center = [38.526600,-96.726486]
-
- export default {
+export default {
   props: {
     'latitude': {
       type: Number,
@@ -122,9 +120,9 @@ import { mapState } from 'vuex'
       var new_marker = new google.maps.Marker({
         position: new google.maps.LatLng(latitude, longitude),
         icon:{
-       // path: 'M32 19l-6-6v-9h-4v5l-6-6-16 16v1h4v10h10v-6h4v6h10v-10h4z', //house with chimney
-         //path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z', //round pin
-         // path: 'M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z', //house without chimney
+          //path: 'M32 19l-6-6v-9h-4v5l-6-6-16 16v1h4v10h10v-6h4v6h10v-10h4z', //house with chimney
+          //path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z', //round pin
+          //path: 'M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z', //house without chimney
           path: 'M16 0c-5.523 0-10 4.477-10 10 0 10 10 22 10 22s10-12 10-22c0-5.523-4.477-10-10-10zM16 16c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z',//normal pin
           fillOpacity: 1.0,
           strokeColor: '#000000',
@@ -137,7 +135,7 @@ import { mapState } from 'vuex'
         title: "new marker"
       })
       var infowindow =  new google.maps.InfoWindow({
-		  content: ''
+        content: ''
       });
       new_marker.addListener('mouseover', function() {
         infowindow.setContent(addr);
@@ -147,22 +145,22 @@ import { mapState } from 'vuex'
         infowindow.close();
       });
       return new_marker;
-     },
-     clearMarkers(){
-       for(let i = 0; i < this.$markers.length; i++){
-         this.$markers[i].setMap(null);
-       }
-     },
-     populateMap(){
-       var test_data = this.test_data
-       for(var property in this.test_data){ //loop through all properties
+    },
+    clearMarkers(){
+      for(let i = 0; i < this.$markers.length; i++){
+        this.$markers[i].setMap(null);
+      }
+    },
+    populateMap(){
+      var test_data = this.test_data
+      for(var property in this.test_data){ //loop through all properties
         var name = test_data[property].name
         var longitude = test_data[property].longitude
         var latitude = test_data[property].latitude
         var colval = test_data[property].price
         this.makeMarker(latitude, longitude, name, colval)
       }
-     }
-   }
- }
+    }
+  }
+}
 </script>  

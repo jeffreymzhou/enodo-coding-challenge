@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <h1>
-COLOR GRADIENT TEST
+      COLOR GRADIENT TEST
     </h1>
     <button class="btn btn-primary" @click="make_gradient">
       Generate Colors
     </button>
     <br><br>
-     <b-form>
+    <b-form>
       <b-form-group id="input-group-2" label-for="input-2">
         <b-form-input
           id="input-2"
@@ -42,7 +42,6 @@ COLOR GRADIENT TEST
       <h2>
         Your Color: {{ color }}
       </h2>
-      <div id="color"></div>
     </div>
     <div class="row">
       <div class="col-md-3">
@@ -57,10 +56,9 @@ import { mapState } from 'vuex'
 export default {
   data() {
     return{
-      range:{ 
+      range:{ //ranges for red and green gradient
           min: "",
           max: ""
-        
       },
       num: "",
       color: ""
@@ -106,12 +104,9 @@ export default {
     }
   }
 }
-
-
 </script>
 
 <style>
-
 .color{
   width:100%;
 }

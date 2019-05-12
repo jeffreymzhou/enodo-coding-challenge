@@ -9,7 +9,6 @@
       <div class="col-md-9">
         <Maps/>
       </div>
-      
     </div>
   </div>
 </template>
