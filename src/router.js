@@ -7,11 +7,12 @@ import FilterTest from './views/FilterTest.vue'
 import PopulateMap from'./views/PopulateMap.vue'
 import ColorGradient from'./views/ColorGradient.vue'
 import FullMap from './views/FullMap.vue'
+import App from './App.vue'
 
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -48,6 +49,10 @@ export default new Router({
       path: '/fullmap',
       name: 'fullmap',
       component: FullMap
+    },
+    {
+      path: '*',
+      component: Home
     }
   ]
 })
