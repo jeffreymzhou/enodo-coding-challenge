@@ -80,15 +80,15 @@
     
 <!-- AGE  -->
      <b-row class="ml-1 mt-2">
-       Age
+       Age 
      </b-row>
      <b-row class="my-1">
       
        <b-col sm="6">
-         <b-form-input id="input-none" v-model="num_filters.AGE.min" size="sm" placeholder="Min"></b-form-input>
+         <b-form-input id="input-none" v-model="num_filters.AGE.min" size="sm" placeholder="Min (yrs)"></b-form-input>
        </b-col>
        <b-col sm="6">
-         <b-form-input id="input-none" v-model="num_filters.AGE.max"  size="sm" placeholder="Max"></b-form-input>
+         <b-form-input id="input-none" v-model="num_filters.AGE.max"  size="sm" placeholder="Max (yrs)"></b-form-input>
        </b-col>
      </b-row>
 <!-- ESTIMATED_MARKET_VALUE -->
@@ -98,10 +98,10 @@
      <b-row class="my-1">
       
        <b-col sm="6">
-         <b-form-input id="input-none" v-model="num_filters.ESTIMATED_MARKET_VALUE.min" size="sm" placeholder="Min"></b-form-input>
+         <b-form-input id="input-none" v-model="num_filters.ESTIMATED_MARKET_VALUE.min" size="sm" placeholder="Min (usd)"></b-form-input>
        </b-col>
        <b-col sm="6">
-         <b-form-input id="input-none" v-model="num_filters.ESTIMATED_MARKET_VALUE.max" size="sm" placeholder="Max"></b-form-input>
+         <b-form-input id="input-none" v-model="num_filters.ESTIMATED_MARKET_VALUE.max" size="sm" placeholder="Max (usd)"></b-form-input>
        </b-col>
      </b-row>
 
@@ -585,7 +585,7 @@ import { mapState } from 'vuex'
 
 let sanfrancisco = [37.782685, -122.411364];
 let us_center = [38.526600,-96.726486]
-let chicago_center = [41.8781, -87.6298]
+let chicago_center = [41.8807, -87.6742]
 
 export default {
   props: {
@@ -612,7 +612,7 @@ export default {
     ...mapState([
       'sample',
       'filter_test_data',
-      'data'
+      'full_data'
     ])
   },
   mounted() {
@@ -621,7 +621,7 @@ export default {
       center: new google.maps.LatLng(this.latitude, this.longitude),
       zoom: this.zoom
     });
-    this.filtered_test_data=this.data //set filtered data to all data
+    this.filtered_test_data=this.full_data //set filtered data to all data
     this.populateMap(); //prepopulate map with all properties
   },
   created(){
@@ -656,15 +656,14 @@ export default {
           { value: 'Two or three story non-fireproof corridor apartments,or california type apartments, interior entrance                         ', text: 'Two or three story non-fireproof corridor apartments,or california type apartments, interior entrance'},
           { value: 'Two or three story non-frprf. crt. and corridor apts or california type apts, no corridors, ex. entrance                       ', text: 'Two or three story non-frprf. crt. and corridor apts or california type apts, no corridors, ex. entrance'},
           { value: 'Mixed use commercial/residential with apts. above seven units or more or building sq. ft. over 20,000', text: 'Mixed use commercial/residential with apts. above seven units or more or building sq. ft. over 20,000'},
-          // 2 or 3 story bldng, 7 or more units, sngle devel., 1 or more contig. parcels, in common ownership                           
-          // Rental mdrn row houses, 7 or more unts in a sing. dvlpment or 1 or more contig. prcls in comm. ownrshp                        
-          // Rented mdrn row houses, 7 or more units in a single develop. or 1 or more contig. parcels in cmn. ownshp.                       
-          // Special residential improvements                                                                                                                                             
+          { value: 'row houses', text: 'Rental mdrn row houses, 7 or more unts in a sing. dvlpment or 1 or more contig. prcls in comm. ownrshp'},
+          { value: '2 or 3 story bldng, 7 or more units, sngle devel., 1 or more contig. parcels, in common ownership ', text: '2 or 3 story bldng, 7 or more units, sngle devel., 1 or more contig. parcels, in common ownership '},
+          { value: 'Special residential improvements ', text: 'Special residential improvements '},                                                                                                                                           
         ],
         res_type: [
           { value: null, text: 'Any'},
-          { value: 'Two Story        ', text: 'Two Story'},
-          { value: 'Three Story       ', text: 'Three Story'},
+          { value: 'Two Story', text: 'Two Story'},
+          { value: 'Three Story', text: 'Three Story'},
           { value: '1.5 - 1.9 ', text: '1.5 - 1.9'}
         ],
         bldg_use: [
@@ -684,23 +683,45 @@ export default {
         ],
         bsmt_desc: [
           { value: null, text: 'Any'},
-          { value: 123, text: '5'}
+          { value: 'Unfinished', text: 'Unfinished'},
+          { value: 'Full', text: 'Full'},
+          { value: 'Slab', text: 'Slab'},
+          { value: 'Apartment', text: 'Apartment'},
+          { value: 'Formal Rec. Room', text: 'Formal Rec. Room'},
+          { value: 'Craw', text: 'Craw'}
         ],
         attic_desc: [
-          { value: null, text: 'Any'},
-          { value: 123, text: '4'}
+          { value: 'null', text: 'Any'},
+          { value: 'Partial', text: 'Partial and Living Area'},
+          { value: 'Full', text: 'Full and Living Area'}
         ],
         gar_desc: [
           { value: null, text: 'Any'},
-          { value: 123, text: '3'}
+          { value: '4 Cars A', text: '4 Cars Attached'},
+          { value: '4 Cars D', text: '4 Cars Detatched'},
+          { value: '3 1/2 Cars A', text: '3 1/2 Cars Attached'},
+          { value: '3 1/2 Cars D', text: '3 1/2 Cars Detatched'},
+          { value: '3 Cars A', text: '3 Cars Attached'},
+          { value: '3 Cars D', text: '3 Cars Detatched'},
+          { value: '2 1/2 Cars A', text: '2 1/2 Cars Attached'},
+          { value: '2 1/2 Cars D', text: '2 1/2 Cars Detatched'},
+          { value: '2 Cars A', text: '2 Cars Attached'},
+          { value: '2 Cars D', text: '2 Cars Detatched'},
+          { value: '1 1/2 Car A', text: '1 1/2 Car Attached'},
+          { value: '1 1/2 Car D', text: '1 1/2 Car Detached'},
+          { value: '1 Car A', text: '1 Car Attached'},
+          { value: '1 Car D', text: '1 Car Detached'}
+          
+          
         ],
         appeal_a_status: [
           { value: null, text: 'Any'},
-          { value: 123, text: '2'}
+          { value: 'A', text: 'Appeal Review Complete'}
         ],
         appeal_a_result: [
           { value: null, text: 'Any'},
-          { value: 123, text: '1'}
+          { value: 'e A', text: 'Appeal Value Adjusted'},
+          { value: 'N', text: 'Appeal Value Not Adjusted'}
         ],
       },
       range:{ //for color calibration
@@ -854,6 +875,12 @@ export default {
     };
   },
   methods: {
+    test_substring_cmp(){
+      if ( "Hello, my name is jeffrey".indexOf( "jeffrey" ) > -1 ) {
+        console.log('it works')
+        }  
+        
+    },
     toggle_extra_filters(){
       this.show_extra_filters = !this.show_extra_filters
     },
@@ -863,7 +890,7 @@ export default {
       }
     },
     filter_pass(p){ //filter individual property; returns true if pass, returns false if not-pass
-
+console.log("filter pass invoked")
       var num_filters = this.num_filters
       var type_filters = this.type_filters
     
@@ -871,8 +898,7 @@ export default {
         var min = num_filters[filter].min 
         var max = num_filters[filter].max
         var curr_val = p[filter]
-        console.log("made it into forloop")
-        console.log(curr_val)
+        
         if(curr_val.length === 0){ 
             return false;
         } 
@@ -888,24 +914,25 @@ export default {
         }
       }
 
-      /*    for(var filter in type_filters){ //filter all categorical values
+          for(var filter in type_filters){ //filter all categorical values
+          console.log(filter)
         var desired_str = type_filters[filter]
         var curr_str = p[filter]
-          if(desired_str.length > 0){
-            if(curr_str !== desired_str){
-              return false;
-            }
-          } 
-        if ( stringB.indexOf( stringA ) > -1 ) {
-        // String B contains String A
+        if(desired_str === null){
+          continue
+        }
+        
+        desired_str = desired_str + ""
+        curr_str = curr_str + ""
+        if (!( curr_str.indexOf( desired_str ) > -1 )){
+         return false;
         } 
-      } */
+      } 
       return true;
 
     },
     filter_method(){ //refreshes the map
-      console.log('filter method is called')
-      this.filtered_test_data = this.data.filter(this.filter_all)
+      this.filtered_test_data = this.full_data.filter(this.filter_all)
       this.clearMarkers();
       this.populateMap();
     },
@@ -939,7 +966,6 @@ export default {
       return '#' + rl + r_hex + gl + g_hex + '77'
     },
     makeMarker(latitude, longitude, addr, colval) {
-      console.log("makeMarker-onmaps invoked")
       var new_marker = new google.maps.Marker({
         position: new google.maps.LatLng(latitude, longitude),
         icon:{
@@ -970,22 +996,18 @@ export default {
       return new_marker;
       },
     clearMarkers(){
-      console.log("clearMarkers invoked")
       for(let i = 0; i < this.$markers.length; i++){
         this.$markers[i].setMap(null);
       }
       this.$markers = [];
     },
     populateMap(){
-      console.log("populateMaps invoked")
       var data = this.filtered_test_data
-      for(var property in this.data){ //loop through all properties
-        console.log(data[property])
+      for(var property in data){ //loop through all properties
         var name = data[property].Full_Address
         var longitude = data[property].Latitude //mixup in excel sheet data (lat switched with long)
         var latitude = data[property].Longitude
         var colval = data[property].ESTIMATED_MARKET_VALUE
-        console.log(property + "| name: " + name + " | lat: " + latitude + " | long: " + longitude)
         this.makeMarker(latitude, longitude, name, colval)
       }
     }
