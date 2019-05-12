@@ -66,13 +66,6 @@ export default {
       color: ""
     }
   },
-  computed: {
-    ...mapState([
-      'sample',
-      'data',
-      'filter_test_data'
-    ])
-  },
   methods: {
     make_color(num){
       var min = parseInt(this.range.min)
@@ -104,11 +97,9 @@ export default {
       return '#' + rl + r_hex + gl + g_hex + '00'
     },
     make_gradient(){
-      console.log("make gradient called")
       var html_colors = [];
       for(var i = this.range.min;i< this.range.max ;i++){
-        console.log("executed:" + this.make_color(i))
-        html_colors.push("<div class='color' style='background-color:"+ this.make_color(i) +"; height: 20px;'></div>");
+        html_colors.push("<div class='color' style='background-color:"+ this.make_color(i) +"; height: " + (400/(this.range.max - this.range.min)) + "px;'></div>");
       }
       document.getElementById("colors").innerHTML = html_colors.join('');
       this.color = this.make_color(this.num)

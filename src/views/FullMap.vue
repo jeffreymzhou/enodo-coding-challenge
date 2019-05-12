@@ -626,12 +626,10 @@ export default {
   },
   created(){
     EventBus.$on('clear-markers', () =>{
-      console.log("eventbus clear markers activated")
       this.clearMarkers();
       this.$markers = [];
     });
     EventBus.$on('add-marker', (data) =>{
-      console.log("eventbus add markers activated")
       let marker = this.makeMarker(data.latitude, data.longitude);
       this.$markers.push(marker);
     })
@@ -877,12 +875,6 @@ export default {
   methods: {
     scroll() {
     document.getElementById( 'map' ).scrollIntoView();    
-    },
-    test_substring_cmp(){
-      if ( "Hello, my name is jeffrey".indexOf( "jeffrey" ) > -1 ) {
-        console.log('it works')
-        }  
-        
     },
     toggle_extra_filters(){
       this.show_extra_filters = !this.show_extra_filters

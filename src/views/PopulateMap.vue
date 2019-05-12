@@ -54,7 +54,7 @@ import { mapState } from 'vuex'
     ...mapState([
       'sample',
       'data',
-      'filter_test_data'
+      'test_data'
     ])
   },
   mounted() {
@@ -119,11 +119,10 @@ import { mapState } from 'vuex'
       return '#' + rl + r_hex + gl + g_hex + '77'
     },
     makeMarker(latitude, longitude, addr, colval) {
-      console.log("makeMarker-onmaps invoked")
       var new_marker = new google.maps.Marker({
         position: new google.maps.LatLng(latitude, longitude),
         icon:{
-         // path: 'M32 19l-6-6v-9h-4v5l-6-6-16 16v1h4v10h10v-6h4v6h10v-10h4z', //house with chimney
+       // path: 'M32 19l-6-6v-9h-4v5l-6-6-16 16v1h4v10h10v-6h4v6h10v-10h4z', //house with chimney
          //path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z', //round pin
          // path: 'M32 18.451l-16-12.42-16 12.42v-5.064l16-12.42 16 12.42zM28 18v12h-8v-8h-8v8h-8v-12l12-9z', //house without chimney
           path: 'M16 0c-5.523 0-10 4.477-10 10 0 10 10 22 10 22s10-12 10-22c0-5.523-4.477-10-10-10zM16 16c-3.314 0-6-2.686-6-6s2.686-6 6-6 6 2.686 6 6-2.686 6-6 6z',//normal pin
@@ -144,26 +143,23 @@ import { mapState } from 'vuex'
         infowindow.setContent(addr);
         infowindow.open(map, new_marker);
       });
-      // assuming you also want to hide the infowindow when user mouses-out
       new_marker.addListener('mouseout', function() {
         infowindow.close();
       });
       return new_marker;
      },
      clearMarkers(){
-       console.log("clearMarkers-onmaps invoked")
        for(let i = 0; i < this.$markers.length; i++){
          this.$markers[i].setMap(null);
        }
      },
      populateMap(){
-       var filter_test_data = this.filter_test_data
-       for(var property in this.filter_test_data){ //loop through all properties
-        var name = filter_test_data[property].name
-        var longitude = filter_test_data[property].longitude
-        var latitude = filter_test_data[property].latitude
-        var colval = filter_test_data[property].price
-        console.log(property + "| name: " + name + " | lat: " + latitude + " | long: " + longitude)
+       var test_data = this.test_data
+       for(var property in this.test_data){ //loop through all properties
+        var name = test_data[property].name
+        var longitude = test_data[property].longitude
+        var latitude = test_data[property].latitude
+        var colval = test_data[property].price
         this.makeMarker(latitude, longitude, name, colval)
       }
      }

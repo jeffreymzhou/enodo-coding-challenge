@@ -3,11 +3,7 @@
         <h1>
           Data Table
         </h1>
-        
-        
-        <b-table striped hover :items="full_data"></b-table>
-      
-        
+        <b-table striped hover :items="full_data"></b-table>   
   </div>
 </template>
 
@@ -20,12 +16,6 @@ import XLSX from 'xlsx'
 export default {
   data() {
     return {
-      filters: {
-        ESTIMATED_MARKET_VALUE: {
-          min: null,
-          max: null
-        }
-      }
     }
   },
   computed: {
@@ -34,12 +24,6 @@ export default {
     ])
   },
   methods: {
-    testfunction () {
-      this.teststring = "test function works"
-    },
-    togglePetForm() {
-      this.showPetForm = !this.showPetForm
-    },
     parse_xl_to_json () {
       var url = "data.xlsx";
       var parsed_data = {}
