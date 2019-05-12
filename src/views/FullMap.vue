@@ -5,7 +5,7 @@
           <button class="btn btn-info btn-block" @click="filter_method">
             Apply Filters
           </button>
-            {{ filtered_test_data.length }} results
+            {{ filtered_test_data.length }} results (out of 1500)
       </div>
       
     
@@ -564,7 +564,6 @@
       
       <div id="map" class="h-full"></div>
     </div>
-    <b-table striped hover :items="filtered_test_data"></b-table>
   </div>
 </template>
 
@@ -584,7 +583,7 @@
 import { mapState } from 'vuex'
 
 let sanfrancisco = [37.782685, -122.411364];
-let us_center = [38.526600,-96.726486]
+let us_center = [38.526690,-96.726486]
 let chicago_center = [41.8807, -87.6742]
 
 export default {
@@ -604,7 +603,7 @@ export default {
     'zoom': {
       type: Number,
       default() {
-        return 14
+        return 13
       }
     },
   },
@@ -623,6 +622,7 @@ export default {
     });
     this.filtered_test_data=this.full_data //set filtered data to all data
     this.populateMap(); //prepopulate map with all properties
+    this.scroll();
   },
   created(){
     EventBus.$on('clear-markers', () =>{
@@ -875,6 +875,9 @@ export default {
     };
   },
   methods: {
+    scroll() {
+    document.getElementById( 'map' ).scrollIntoView();    
+    },
     test_substring_cmp(){
       if ( "Hello, my name is jeffrey".indexOf( "jeffrey" ) > -1 ) {
         console.log('it works')
@@ -890,7 +893,7 @@ export default {
       }
     },
     filter_pass(p){ //filter individual property; returns true if pass, returns false if not-pass
-console.log("filter pass invoked")
+
       var num_filters = this.num_filters
       var type_filters = this.type_filters
     
@@ -915,7 +918,7 @@ console.log("filter pass invoked")
       }
 
           for(var filter in type_filters){ //filter all categorical values
-          console.log(filter)
+          
         var desired_str = type_filters[filter]
         var curr_str = p[filter]
         if(desired_str === null){

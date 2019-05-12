@@ -5,7 +5,7 @@
         </h1>
         
         
-        <b-table striped hover :items="data"></b-table>
+        <b-table striped hover :items="full_data"></b-table>
       
         
   </div>
@@ -30,9 +30,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'sample',
-      'data',
-      'full_property_data'
+      'full_data'
     ])
   },
   methods: {

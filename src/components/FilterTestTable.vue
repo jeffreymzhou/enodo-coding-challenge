@@ -62,6 +62,9 @@
 <script>
 import { mapState } from 'vuex'
 export default {
+  mounted(){
+    this.filter_method()
+  },
   data() {
     return{
       filtered_test_data: {},
